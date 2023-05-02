@@ -6,10 +6,11 @@ const path = require('path')
 const bodyParser = require('body-parser');
 const nodeNotifier = require('node-notifier')
 const methodOverride = require('method-override');
+const mongodb = require('mongodb')
 const app = express()
 
 mongoose.set("strictQuery", true);
-mongoose.connect("mongodb://127.0.0.1:27017/BlogDB")
+mongoose.connect("mongodb+srv://Bloggy:Iamphenomenol@cluster0.4dhdw8l.mongodb.net/?retryWrites=true&w=majority")
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
