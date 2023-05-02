@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
+const path = require('path')
 const bodyParser = require('body-parser');
 const nodeNotifier = require('node-notifier')
 const methodOverride = require('method-override');
@@ -12,6 +13,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/BlogDB")
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname,'public')))
 const UserPost = new mongoose.Schema({
     title: { type: String },
     content: { type: String },
