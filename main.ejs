@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <!-- fontawesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+
+    <%- include('Navbar')%>
+
+        <div class="jumbotron jumbotron-fluid ">
+            <div class="container text-center">
+                <h1 class="display-4 font-weight-bolder">BLOGGY</h1>
+                <p class="lead font-weight-bold">Discover , what's happening around the world!!!</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class=" border p-3 container d-flex justify-content-center align-items-center flex-column">
+                        <% if(Posts.length==0){ %>
+
+                            <img style="max-width: 100%;"
+                                src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                                alt="">
+                            <h3>No Post Right Now!!</h3>
+                            <button class="btn btn-dark"><a href="/post"
+                                    style="color: white; text-decoration: none;  font-weight: bolder;">Post
+                                    Now</a></button>
+                            <% } %>
+                    </div>
+                    <% if(Posts.length !=0){ %>
+
+                        <% Posts.map((elem)=>{ %>
+                            <% var time=elem.date.replace("T"," , Time: ") %>
+                            <div class=" card mb-4">
+
+                                <div class="card-body">
+                                    <h2 class="card-title">
+                                        <%=elem.title%>
+                                            <a style="float: right;" href="/Blog/<%=elem.title%>" class="px-2"><i
+                                                    class="fa-solid fa-trash"></i></a>
+                                            <a style="float: right;color: white;font-weight: bolder;"
+                                                class="btn btn-primary" href="/Edit/Blog/<%=elem.title%>">Edit </a>
+                                    </h2>
+                                    <p class="card-text">
+                                        <%=elem.content%>
+                                    </p>
+                                    <!-- <a href="#" class="btn btn-primary">Read More &raquo;</a> -->
+                                </div>
+                                <div class="card-footer text-muted">
+                                    Posted on <%=time%>
+                                        <p style="float: right; font-weight: bolder; border: 1px solid white;background-color: black;color: white;padding:0.5%;border-radius:8px;
+                                        ">
+                                            <%=elem.Category%>
+                                        </p>
+                                </div>
+                </div>
+                <% }) %>
+                    <% } %>
+            </div>
+
+            <div class="col-lg-4" id="About">
+                <div class="card mb-4 about">
+                    <div class="card-body">
+                        <h2 class="card-title">About Me</h2>
+                        <img class="img-fluid mb-3"
+                            src="https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+                            alt="About Me Image">
+                        <p class="card-text">Awww , you are reading my blogs!!! Hi , my name is <strong>Karan
+                                Sapra</strong> and I am a
+                            <strong>full stack developer</strong> and also a keen learner. I have also interest in music
+                            and dance too.
+                        </p>
+                        <a href="https://karan-sapra.onrender.com" class="btn btn-primary">Read More »</a>
+                    </div>
+                </div>
+                <div class="card my-4 category">
+                    <h5 class="card-header">Categories</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="/Technical">Technical </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Finance">Finance</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Personality">Personality </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="/Automobile">AutoMobile</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Tutorials">Tutorials</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <%-include('footer')%>
+
+
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+
+</body>
+
+</html>
